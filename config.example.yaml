@@ -1,0 +1,15 @@
+changelogs:
+  - kind: github
+    dir: dist
+    formats:
+      - extension: asciidoc
+      - extension: json
+      - extension: markdown
+    spec:
+      # No release
+      # owner: updatecli-test
+      #owner: olblak
+      #repository: nocode
+      owner: updatecli
+      repository: udash
+    
