@@ -11,7 +11,7 @@ func toJsonFile(s interface{}, filename string) error {
 
 	data, err = json.MarshalIndent(s, "", "  ")
 	if err != nil {
-		return fmt.Errorf("marshalling json: %v", err)
+		return fmt.Errorf("marshaling json: %v", err)
 	}
 
 	err = dataToFile(data, filename)

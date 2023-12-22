@@ -27,7 +27,7 @@ Init will set default value if none are set
 */
 func (r *ReleaseType) Init() {
 	// If all release type are disable then fallback to stable one only
-	if !r.Draft && !r.PreRelease && !r.Release {
+	if r.isZero() {
 		r.Release = true
 	}
 }

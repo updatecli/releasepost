@@ -23,7 +23,10 @@ func dataToFile(data []byte, filename string) error {
 		return err
 	}
 	defer f.Close()
-	f.Write(data)
+	_, err = f.Write(data)
+	if err != nil {
+		fmt.Printf("writing file %s: %v", filename, err)
+	}
 
 	fmt.Printf("* %s created\n", filename)
 

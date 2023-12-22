@@ -23,6 +23,10 @@ var (
 	defaultKind = "github"
 	// defaultDir is the default directory where changelog files will be repost
 	defaultDir = "dist"
+
+	nameMarkdown = "markdown"
+	nameJson     = "json"
+	nameAsciidoc = "asciidoc"
 )
 
 /*
@@ -126,7 +130,7 @@ func (c Config) SaveToDisk(changelogs []Spec) error {
 
 		for _, format := range c.Formats {
 			switch format.Extension {
-			case "asciidoc":
+			case nameAsciidoc:
 				filename := filepath.Join(
 					c.Dir,
 					defaultChangelogDir,
@@ -137,7 +141,7 @@ func (c Config) SaveToDisk(changelogs []Spec) error {
 					continue
 				}
 
-			case "json":
+			case nameJson:
 				filename := filepath.Join(
 					c.Dir,
 					defaultChangelogDir,
@@ -148,7 +152,7 @@ func (c Config) SaveToDisk(changelogs []Spec) error {
 					continue
 				}
 
-			case "markdown":
+			case nameMarkdown:
 				filename := filepath.Join(
 					c.Dir,
 					defaultChangelogDir,
@@ -203,13 +207,13 @@ func (c Config) SaveIndexToDisk(changelogs []Spec) error {
 		}
 
 		switch format.Extension {
-		case "asciidoc":
+		case nameAsciidoc:
 			indexFileName := format.IndexFileName + ".adoc"
 			if err := toIndexAsciidocFile(data, filepath.Join(c.Dir, indexFileName)); err != nil {
 				fmt.Printf("creating index asciidoc file %s: %v\n", filepath.Join(c.Dir, indexFileName), err)
 			}
 
-		case "json":
+		case nameJson:
 			indexFileName := format.IndexFileName + ".json"
 
 			/*
@@ -231,7 +235,7 @@ func (c Config) SaveIndexToDisk(changelogs []Spec) error {
 				continue
 			}
 
-		case "markdown":
+		case nameMarkdown:
 			indexFileName := format.IndexFileName + ".md"
 			if err := toIndexMarkdownFile(data, filepath.Join(c.Dir, indexFileName)); err != nil {
 				fmt.Printf("creating index markdown file %s: %v", filepath.Join(c.Dir, indexFileName), err)
