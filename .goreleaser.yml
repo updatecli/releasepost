@@ -1,0 +1,213 @@
+---
+archives:
+  - name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.adoc
+      - LICENSE
+      - completions/*
+      - manpages/*
+
+#aurs:
+#  - homepage:  https://www.updatecli.io
+#    description: Repost changelogs to your static site generator git repository
+#    maintainers:
+#      - 'Olivier Vernin <olivier at vernin dot me>'
+#      - 'Jonathan Neidel <aur at jneidel dot com>'
+#    license: 'Apache'
+#    private_key: '{{ .Env.AUR_KEY }}'
+#    git_url: 'ssh://aur@aur.archlinux.org/releasepost-bin.git'
+#    package: |-
+#      # bin
+#      install -Dm755 "./releasepost" "${pkgdir}/usr/bin/releasepost"
+#      # license
+#      install -Dm644 "./LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+#      # completions
+#      install -Dm644 "./completions/releasepost.bash" "${pkgdir}/usr/share/bash-completion/completions/releasepost"
+#      install -Dm644 "./completions/releasepost.zsh" "${pkgdir}/usr/share/zsh/site-functions/_releasepost"
+#      install -Dm644 "./completions/releasepost.fish" "${pkgdir}/usr/share/fish/vendor_completions.d/releasepost.fish"
+#      # man pages
+#      install -Dm644 "./manpages/releasepost.1.gz" "${pkgdir}/usr/share/man/man1/releasepost.1.gz"
+
+before:
+  hooks:
+    - go mod tidy
+    - go mod download
+    - ./scripts/completions.sh
+    - ./scripts/manpages.sh
+
+#brews:
+#  - name: releasepost
+#    folder: Formula
+#    repository:
+#      owner: updatecli
+#      name: homebrew-releasepost
+#      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+#    commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
+#    homepage: "https://updatecli.io/"
+#    description: 'Updatecli is a declarative dependency management command line tool.'
+#    license: 'Apache-2.0'
+#    test: |
+#      system "#{bin}/releasepost version"
+#    install: |-
+#      bin.install "releasepost"
+#      bash_completion.install "completions/releasepost.bash" => "releasepost"
+#      zsh_completion.install "completions/releasepost.zsh" => "_releasepost"
+#      fish_completion.install "completions/releasepost.fish"
+#      man1.install "manpages/releasepost.1.gz"
+
+builds:
+  - id: releasepost
+    main: ./main.go
+    binary: releasepost
+    ldflags:
+      - -w -s
+      - -X "github.com/updatecli/releasepost/internal/core/version.BuildTime={{.Date}}"
+      - -X "github.com/updatecli/releasepost/internal/core/version.GoVersion={{.Env.GOVERSION}}"
+      - -X "github.com/updatecli/releasepost/internal/core/version.Version={{ .Version }}"
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+      - arm
+
+changelog:
+  ## Delegate Changelog to release-drafter
+  skip: true
+
+checksum:
+  name_template: 'checksums.txt'
+
+dockers:
+  - image_templates:
+      - 'updatecli/releasepost:{{ .Tag }}-amd64'
+      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-amd64'
+    dockerfile: Dockerfile
+    use: buildx
+    build_flag_templates:
+      - "--pull"
+      - "--no-cache"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source={{.GitURL}}"
+      - "--platform=linux/amd64"
+    goos: linux
+    goarch: amd64
+    extra_files:
+      - Makefile
+  - image_templates:
+      - 'updatecli/releasepost:{{ .Tag }}-arm64'
+      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-arm64'
+    dockerfile: Dockerfile
+    use: buildx
+    build_flag_templates:
+      - "--pull"
+      - "--no-cache"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source={{.GitURL}}"
+      - "--platform=linux/arm64"
+    goos: linux
+    goarch: arm64
+    extra_files:
+      - Makefile
+
+docker_signs:
+  - cmd: cosign
+    artifacts: manifests
+    output: true
+    args:
+      - 'sign'
+      - '--yes'
+      - '${artifact}@${digest}'
+
+docker_manifests:
+  - name_template: 'updatecli/releasepost:{{ .Tag }}'
+    image_templates:
+      - 'updatecli/releasepost:{{ .Tag }}-amd64'
+      - 'updatecli/releasepost:{{ .Tag }}-arm64'
+  - name_template: 'ghcr.io/updatecli/releasepost:{{ .Tag }}'
+    image_templates:
+      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-amd64'
+      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-arm64'
+  - name_template: 'updatecli/releasepost:latest'
+    image_templates:
+      - 'updatecli/releasepost:{{ .Tag }}-amd64'
+      - 'updatecli/releasepost:{{ .Tag }}-arm64'
+  - name_template: 'ghcr.io/updatecli/releasepost:latest'
+    image_templates:
+      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-amd64'
+      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-arm64'
+
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+
+nfpms:
+  - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    homepage: 'https://www.updatecli.io'
+    description: 'Repost changelogs to your static site generator git repository'
+    maintainer: 'Olivier Vernin <olivier@vernin.me>'
+    license: 'Apache-2.0'
+    vendor: Updatecli
+    section: utils
+    formats:
+      - apk
+      - deb
+      - rpm
+    dependencies:
+      - ca-certificates
+    contents:
+      - src: ./completions/releasepost.bash
+        dst: /usr/share/bash-completion/completions/releasepost
+        file_info:
+          mode: 0644
+      - src: ./completions/releasepost.fish
+        dst: /usr/share/fish/vendor_completions.d/releasepost.fish
+        file_info:
+          mode: 0644
+      - src: ./completions/releasepost.zsh
+        dst:  /usr/share/zsh/vendor-completions/_releastpost
+        file_info:
+          mode: 0644
+      - src: ./manpages/releasepost.1.gz
+        dst: /usr/share/man/man1/releasepost.1.gz
+        file_info:
+          mode: 0644
+      - src: ./LICENSE
+        dst: /usr/share/doc/releasepost/copyright
+        file_info:
+          mode: 0644
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+sboms:
+  - artifacts: archive
+
+signs:
+  - cmd: cosign
+    certificate: '${artifact}.pem'
+    signature: "${artifact}.sig"
+    output: true
+    artifacts: checksum
+    args:
+      - sign-blob
+      - '--yes'
+      - '--output-certificate=${certificate}'
+      - '--output-signature=${signature}'
+      - '${artifact}'
