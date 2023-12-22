@@ -3,8 +3,8 @@ package runner
 import (
 	"fmt"
 
-	"github.com/olblak/releasepost/internal/core/changelog"
-	"github.com/olblak/releasepost/internal/plugins/github"
+	"github.com/updatecli/releasepost/internal/core/changelog"
+	"github.com/updatecli/releasepost/internal/plugins/github"
 )
 
 /*

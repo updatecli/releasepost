@@ -8,7 +8,7 @@ import (
 
 	"github.com/shurcooL/githubv4"
 
-	"github.com/olblak/releasepost/internal/core/changelog"
+	"github.com/updatecli/releasepost/internal/core/changelog"
 )
 
 /*

@@ -3,7 +3,7 @@ package github
 import (
 	"fmt"
 
-	"github.com/olblak/releasepost/internal/core/changelog"
+	"github.com/updatecli/releasepost/internal/core/changelog"
 )
 
 /*

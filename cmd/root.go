@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/olblak/releasepost/internal/core/config"
-	"github.com/olblak/releasepost/internal/core/engine"
 	"github.com/spf13/cobra"
+	"github.com/updatecli/releasepost/internal/core/config"
+	"github.com/updatecli/releasepost/internal/core/engine"
 )
 
 var (

@@ -3,7 +3,7 @@ package engine
 import (
 	"fmt"
 
-	"github.com/olblak/releasepost/internal/core/runner"
+	"github.com/updatecli/releasepost/internal/core/runner"
 )
 
 /*

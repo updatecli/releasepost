@@ -1,8 +1,8 @@
 package engine
 
 import (
-	"github.com/olblak/releasepost/internal/core/config"
-	"github.com/olblak/releasepost/internal/core/runner"
+	"github.com/updatecli/releasepost/internal/core/config"
+	"github.com/updatecli/releasepost/internal/core/runner"
 )
 
 /*

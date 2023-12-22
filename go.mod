@@ -1,4 +1,4 @@
-module github.com/olblak/releasepost
+module github.com/updatecli/releasepost
 
 go 1.21
 

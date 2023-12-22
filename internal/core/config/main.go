@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/olblak/releasepost/internal/core/changelog"
+	"github.com/updatecli/releasepost/internal/core/changelog"
 	"gopkg.in/yaml.v3"
 )
 

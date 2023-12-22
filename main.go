@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/olblak/releasepost/cmd"
+	"github.com/updatecli/releasepost/cmd"
 )
 
 func main() {
