@@ -39,7 +39,9 @@ and then copy them to locally to a directory of your choice.
 
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&configFile, "config", "c", "", "Releasepost configuration file")
-	rootCmd.MarkPersistentFlagRequired("config")
+	rootCmd.AddCommand(
+		versionCmd,
+	)
 }
 
 // Execute executes the root command.
