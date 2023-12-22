@@ -1,0 +1,24 @@
+name: Release Drafter
+
+on:
+  workflow_dispatch:
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: release-drafter/release-drafter@v5
+        with:
+          config-name: release-drafter.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
