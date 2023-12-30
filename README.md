@@ -2,21 +2,27 @@
 
 *Repost changelogs to your static site generator git repository*
 
-releasepost relies on a configuration file to identify what release to monitor and where to repost it.
-
-
 It can generate json, markdown, and asciidoctor files.
 
-## Core
+## Config
 
-TODO
+releasepost relies on a configuration file to identify what release to monitor and where to repost it.
+The configuration file uses the YAML format and accepts the following parameters:
 
-### Configuration
+### Changelogs
 
-TODO
+**name** defines the changelog name to monitor. It is used to identify a changelog configuration among differentts ones.
+
+**dir** defines the directory where to mirror the release note
+
+**kind** defines the kind of changelog to mirror, for example `github`
+
+**formats** defines a list of format parameters for the mirrored changelog.
+
+**spec** defines specific parameters to a kind of mirror.
 
 
-The following example is used for a HUGO website
+The following example can be used for a HUGO website
 
 **Command**
 ```
@@ -40,8 +46,6 @@ changelogs:
       owner: updatecli
       repository: udash
 ```
-
-## Plugins
 
 ### GitHub
 
