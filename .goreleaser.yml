@@ -10,7 +10,7 @@ archives:
       - goos: windows
         format: zip
     files:
-      - README.adoc
+      - README.md
       - LICENSE
       - completions/*
       - manpages/*
