@@ -1,0 +1,32 @@
+scms:
+  default:
+    kind: github
+    spec:
+      owner: updatecli
+      repository: website
+      token: {{ requiredEnv "GITHUB_TOKEN" }}
+
+actions:
+  default:
+    kind: github/pullrequest
+    scmid: default
+    spec:
+      labels:
+        - "documentation"
+
+targets:
+  releasepost:
+    actionid: default
+    disablesourceinput: true
+    kind: shell
+    name: Mirror release note
+    scmid: default
+    spec:
+      command: releasepost --config .releaserepost.yaml
+      environments:
+        - name: GITHUB_TOKEN
+      changedif:
+        kind: file/checksum
+        spec:
+          files:
+            - "content/en/docs/changelogs/updatecli/*"

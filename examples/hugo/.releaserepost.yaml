@@ -1,0 +1,11 @@
+changelogs:
+  - kind: github
+    dir: content/en/docs/changelogs/updatecli
+    formats:
+      - extension: asciidoc
+        indexfilename: _index
+      - extension: json
+        indexfilename: _index
+    spec:
+      owner: updatecli
+      repository: updatecli
