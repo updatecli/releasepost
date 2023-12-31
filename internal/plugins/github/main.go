@@ -52,6 +52,7 @@ func New(s interface{}) (*Github, error) {
 		return &Github{}, fmt.Errorf(strings.Join(strErrs, "\n"))
 	}
 
+	newSpec.mergeFromEnv("RELEASEPOST_GITHUB")
 	newSpec.mergeFromEnv("GITHUB")
 
 	if newSpec.URL == "" {
