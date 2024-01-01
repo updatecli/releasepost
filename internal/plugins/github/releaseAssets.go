@@ -49,7 +49,7 @@ func (g *Github) getReleaseAssets(versionName string) ([]releaseAssetNode, error
 
 	results := []releaseAssetNode{}
 
-	fmt.Printf("Searching release information for %s from %s/%s\n", versionName, g.Spec.Owner, g.Spec.Repository)
+	fmt.Printf("Looking for release assets related to version %s from %s/%s\n", versionName, g.Spec.Owner, g.Spec.Repository)
 	var query releaseAssetsQuery
 
 	variables := map[string]interface{}{

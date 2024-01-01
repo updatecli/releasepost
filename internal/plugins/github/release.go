@@ -67,7 +67,7 @@ changelog returns a changelog description based on a release name
 */
 func (g *Github) changelog(versionName string) (*changelog.Spec, error) {
 
-	fmt.Printf("Searching release information for %s from %s/%s\n", versionName, g.Spec.Owner, g.Spec.Repository)
+	fmt.Printf("Looking for release information related to version %s from %s/%s\n", versionName, g.Spec.Owner, g.Spec.Repository)
 	var query changelogQuery
 
 	variables := map[string]interface{}{
