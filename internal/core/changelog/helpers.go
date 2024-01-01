@@ -1,8 +1,14 @@
 package changelog
 
 import (
+	"bytes"
+	"crypto/sha256"
+	"errors"
 	"fmt"
+	"io"
 	"os"
+
+	"github.com/updatecli/releasepost/internal/core/result"
 )
 
 func initDir(dirName string) error {
@@ -17,6 +23,9 @@ func initDir(dirName string) error {
 
 func dataToFile(data []byte, filename string) error {
 
+	currentChecksum := getChecksumFromFile(filename)
+	newChecksum := getChecksumFromByte(data)
+
 	f, err := os.Create(filename)
 	if err != nil {
 		fmt.Printf("creating file %s: %v", filename, err)
@@ -28,7 +37,45 @@ func dataToFile(data []byte, filename string) error {
 		fmt.Printf("writing file %s: %v", filename, err)
 	}
 
-	fmt.Printf("* %s created\n", filename)
+	if currentChecksum == "" && newChecksum != "" {
+		result.ChangelogResult.Created = append(result.ChangelogResult.Created, filename)
+		return nil
+	}
 
+	if currentChecksum != newChecksum {
+		result.ChangelogResult.Modified = append(result.ChangelogResult.Modified, filename)
+	}
+
+	result.ChangelogResult.UnModified = append(result.ChangelogResult.UnModified, filename)
 	return nil
+}
+
+func getChecksumFromFile(filename string) string {
+	f, err := os.Open(filename)
+	if err != nil {
+		if !errors.Is(err, os.ErrNotExist) {
+			fmt.Println(err)
+		}
+
+		return ""
+	}
+	defer f.Close()
+
+	h := sha256.New()
+	if _, err := io.Copy(h, f); err != nil {
+		fmt.Println(err)
+		return ""
+	}
+
+	return fmt.Sprintf("%x", h.Sum(nil))
+}
+
+func getChecksumFromByte(raw []byte) string {
+	h := sha256.New()
+	if _, err := io.Copy(h, bytes.NewBuffer(raw)); err != nil {
+		fmt.Println(err)
+		return ""
+	}
+
+	return fmt.Sprintf("%x", h.Sum(nil))
 }

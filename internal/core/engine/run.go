@@ -2,6 +2,8 @@ package engine
 
 import (
 	"fmt"
+
+	"github.com/updatecli/releasepost/internal/core/result"
 )
 
 /*
@@ -34,5 +36,8 @@ func (e *Engine) Run() error {
 			continue
 		}
 	}
+
+	result.ChangelogResult.String()
+
 	return nil
 }
