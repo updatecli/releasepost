@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/updatecli/releasepost/internal/core/config"
 	"github.com/updatecli/releasepost/internal/core/engine"
+	"github.com/updatecli/releasepost/internal/core/result"
 )
 
 var (
@@ -19,13 +20,15 @@ var (
 			err := e.Init()
 			if err != nil {
 				fmt.Printf("Failed to initialize releasepost: %v", err)
-				os.Exit(1)
+				os.Exit(2)
 			}
 			err = e.Run()
 			if err != nil {
 				fmt.Printf("Failed to run releasepost: %v", err)
-				os.Exit(1)
+				os.Exit(2)
 			}
+
+			os.Exit(result.ChangelogResult.ExitCode())
 		},
 		Use:   "releasepost",
 		Short: "Releasepost is a release note town crier",

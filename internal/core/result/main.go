@@ -34,3 +34,10 @@ func (c Changelog) String() {
 		}
 	}
 }
+
+func (c Changelog) ExitCode() int {
+	if len(c.Created) == 0 && len(c.Modified) == 0 {
+		return 1
+	}
+	return 0
+}
