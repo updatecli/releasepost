@@ -3,8 +3,24 @@ changelogs:
     dir: dist
     formats:
       - extension: asciidoc
+        frontmatters: |
+          ---
+          title: "{{ .Changelog.Name }}"
+          --
       - extension: json
+        frontmatters: |
+          ---
+          title: "{{ .Changelog.Name }}"
+          --
       - extension: markdown
+        frontmatters: |
+          ---
+          title: "{{ .Changelog.Name }}"
+          --
+        indexfrontmatters: |
+          ---
+          title: "Custom Changelog"
+          --
     spec:
       # No release
       # owner: updatecli-test
