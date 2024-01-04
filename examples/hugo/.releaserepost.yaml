@@ -14,16 +14,7 @@ changelogs:
           title: "Index Changelog"
           ---
       - extension: json
-        frontmatters: |
-          ---
-          title: "{{ .Changelog.Name }}"
-          date: {{ .Changelog.PublishedAt }}
-          ---
         indexfilename: _index
-        indexfrontmatters: |
-          ---
-          title: "Index Changelog"
-          ---
     spec:
       owner: updatecli
       repository: udash

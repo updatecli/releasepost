@@ -13,15 +13,6 @@ changelogs:
           title: "Index Changelog"
           ---
       - extension: json
-        frontmatters: |
-          ---
-          title: "{{ .Changelog.Name }}"
-          date: {{ .Changelog.PublishedAt }}
-          ---
-        indexfrontmatters: |
-          ---
-          title: "Index Changelog"
-          ---
       - extension: markdown
         frontmatters: |
           ---
