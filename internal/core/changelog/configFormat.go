@@ -5,7 +5,7 @@ var (
 	defaultFormats = []ConfigFormat{
 		{
 			Extension:     "markdown",
-			IndexFileName: "_index",
+			IndexFileName: "index",
 		},
 	}
 )
