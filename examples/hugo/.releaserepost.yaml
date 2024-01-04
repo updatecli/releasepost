@@ -3,9 +3,27 @@ changelogs:
     dir: content/en/docs/changelogs/updatecli
     formats:
       - extension: asciidoc
+        frontmatters: |
+          ---
+          title: "{{ .Changelog.Name }}"
+          date: {{ .Changelog.PublishedAt }}
+          ---
         indexfilename: _index
+        indexfrontmatters: |
+          ---
+          title: "Index Changelog"
+          ---
       - extension: json
+        frontmatters: |
+          ---
+          title: "{{ .Changelog.Name }}"
+          date: {{ .Changelog.PublishedAt }}
+          ---
         indexfilename: _index
+        indexfrontmatters: |
+          ---
+          title: "Index Changelog"
+          ---
     spec:
       owner: updatecli
-      repository: updatecli
+      repository: udash

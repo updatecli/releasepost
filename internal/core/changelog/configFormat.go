@@ -8,16 +8,6 @@ var (
 			IndexFileName: "_index",
 		},
 	}
-
-	// defaultIndexFileName is the default front matters using yaml syntax to add to the index file.
-	defaultIndexFrontMatters = `---
-title: Changelogs
----`
-
-	defaultFrontMatters = `---
-title: "{{ .Changelog.Name }}"
-date: {{ .Changelog.PublishedAt }}
----`
 )
 
 type ConfigFormat struct {

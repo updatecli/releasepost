@@ -6,6 +6,14 @@ import (
 	"text/template"
 )
 
+var (
+	// defaultIndexFileName is the default front matters using yaml syntax to add to the index file.
+	defaultIndexFrontMatters = ""
+
+	// defaultFrontMatters is the default front matters using yaml syntax to add to the changelog file.
+	defaultFrontMatters = ""
+)
+
 func renderFrontMatters(data interface{}, frontMatters string) (string, error) {
 
 	tmpl, err := template.New("frontmatters").Parse(frontMatters)
