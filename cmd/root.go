@@ -18,6 +18,12 @@ var (
 
 	rootCmd = &cobra.Command{
 		Run: func(cmd *cobra.Command, args []string) {
+
+			if configFile == "" {
+				fmt.Println("missing configuration file")
+				os.Exit(2)
+			}
+
 			config.ConfigFile = configFile
 			err := e.Init()
 			if err != nil {
