@@ -45,17 +45,19 @@ var (
 			os.Exit(result.ChangelogResult.ExitCode())
 		},
 		Use:   "releasepost",
-		Short: "Releasepost is a release note town crier",
+		Short: "releasepost is a release note town crier",
 		Long: `
-Releasepost is a release note town crier.
-It retrieves release notes from third location, like GitHub releases,
-and then copy them to locally to a directory of your choice.
+releasepost is a release note town crier.
+It retrieves release notes from a third location, like a GitHub release,
+and then copy them locally to your directory of choice.
+It creates one file per release note version and an index file.
+It can creates files using different formats like markdown, asciidoctor, or json.
 `,
 	}
 )
 
 func init() {
-	rootCmd.PersistentFlags().StringVarP(&configFile, "config", "c", "", "Releasepost configuration file")
+	rootCmd.PersistentFlags().StringVarP(&configFile, "config", "c", "", "releasepost configuration file")
 	rootCmd.PersistentFlags().BoolVarP(&dryRun, "dry-run", "d", false, "Dry run mode")
 	rootCmd.AddCommand(
 		versionCmd,
