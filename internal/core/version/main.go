@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/sirupsen/logrus"
-
 	sv "github.com/Masterminds/semver/v3"
 )
 
@@ -25,11 +23,11 @@ var (
 
 // Show displays various version information
 func Show() {
-	logrus.Infof("")
-	logrus.Infof("Application:\t%s", Version)
-	logrus.Infof("%s", strings.ReplaceAll(GoVersion, "go version go", "Golang     :\t"))
-	logrus.Infof("Build Time :\t%s", BuildTime)
-	logrus.Infof("")
+	fmt.Printf("")
+	fmt.Printf("Application:\t%s", Version)
+	fmt.Printf("%s", strings.ReplaceAll(GoVersion, "go version go", "Golang     :\t"))
+	fmt.Printf("Build Time :\t%s", BuildTime)
+	fmt.Printf("")
 }
 
 // IsGreaterThan test if an updatecli manifest required version is greater or equal to the current updatecli binary version
@@ -42,7 +40,7 @@ func IsGreaterThan(binaryVersion, manifestVersion string) (bool, error) {
 
 	if len(binaryVersion) == 0 {
 		if !isDevWarningDisabled {
-			logrus.Warningf("Updatecli binary version is unset. This means you are using a development version that ignores manifest version constraint.\n")
+			fmt.Printf("Updatecli binary version is unset. This means you are using a development version that ignores manifest version constraint.\n")
 			isDevWarningDisabled = true
 		}
 
