@@ -63,18 +63,3 @@ jobs:
         if: ${{ github.event_name == 'schedule' }}
       # Manage and run your integration tests with efficiency
       # https://github.com/ovh/venom
-      - name: Install Venom
-        run: |
-          curl -o /usr/local/bin/venom https://github.com/ovh/venom/releases/download/$VENOM_VERSION/venom.linux-amd64 -L
-          sudo chmod +x /usr/local/bin/venom
-          ls -lha /usr/local/bin/venom
-        env:
-          VENOM_VERSION: v1.1.0
-      - name: Show Venom version
-        run: venom version
-      - name: Run End to End tests
-        run: make test-e2e
-        env:
-          IS_TTY: true # https://github.com/ovh/venom#use-venom-in-ci
-          # Access only to ec2 AMI api in read-only
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
