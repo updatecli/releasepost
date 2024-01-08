@@ -45,11 +45,6 @@ jobs:
         run: goreleaser --version
       - name: Build
         run: make build
-      - name: Quick Test
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: make test-short
-        if: ${{ github.event_name == 'pull_request' }}
       - name: All Test
         env:
           # Access only to ec2 AMI api in read-only
