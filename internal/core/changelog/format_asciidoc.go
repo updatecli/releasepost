@@ -17,10 +17,6 @@ var (
 __{{ .Changelog.Author }} released this {{ .Changelog.PublishedAt }} - {{ .Changelog.Tag }}__
 {{ end }}
 
-{{ if ne .Changelog.Tag .Latest.Tag }}
-IMPORTANT: This changelog is not the latest one, please refer to {{ .Latest.Name }} for the latest changelog.
-{{ end }}
-
 === Description
 
 ---
