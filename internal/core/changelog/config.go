@@ -12,7 +12,6 @@ type IndexData struct {
 }
 
 type ReleaseData struct {
-	Latest       Spec
 	Changelog    Spec
 	FrontMatters string
 }
@@ -116,7 +115,6 @@ func (c Config) SaveToDisk(changelogs []Spec) error {
 
 	for i := range changelogs {
 		data := ReleaseData{
-			Latest:    changelogs[0],
 			Changelog: changelogs[i],
 		}
 
@@ -194,7 +192,6 @@ func (c Config) SaveIndexToDisk(changelogs []Spec) error {
 	}
 
 	data := IndexData{
-		Latest:     changelogs[0],
 		Changelogs: changelogs,
 	}
 
@@ -229,6 +226,7 @@ func (c Config) SaveIndexToDisk(changelogs []Spec) error {
 			}
 			data.Changelogs = shortChangelogs
 			data.Latest = shortChangelogs[0]
+			data.FrontMatters = ""
 
 			if err = toJsonFile(data, filepath.Join(c.Dir, indexFileName)); err != nil {
 				fmt.Printf("creating index json file %s: %v", filepath.Join(c.Dir, "index.json"), err)
