@@ -1,0 +1,17 @@
+name: "deps: bump patch version for Golang module"
+pipelineid: "golang/gomod/patch"
+
+spec:
+  versionfilter:
+    kind: semver
+    pattern: patch
+  ignore:
+    - modules:
+        # Ignoring the following modules as they do not publish release
+        github.com/shurcooL/githubv4: ""
+
+  only:
+    # This repository contains other go.sum file used for testing.
+    # So we want to be sure that we only update the one at the root of the repository
+    - path: "go.mod"
+
