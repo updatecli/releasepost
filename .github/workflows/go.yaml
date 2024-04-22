@@ -35,7 +35,7 @@ jobs:
           # Required: the version of golangci-lint is required
           # and must be specified without patch version:
           # we always use the latest patch version.
-          version: v1.55.2
+          version: v1.57.2
           install-mode: "binary"
       - name: Install GoReleaser
         uses: goreleaser/goreleaser-action@v5
@@ -61,5 +61,5 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         if: ${{ github.event_name == 'schedule' }}
-      # Manage and run your integration tests with efficiency
-      # https://github.com/ovh/venom
+    # Manage and run your integration tests with efficiency
+    # https://github.com/ovh/venom
