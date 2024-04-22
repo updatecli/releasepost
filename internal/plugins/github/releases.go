@@ -98,8 +98,8 @@ func (g *Github) searchReleases() (releases []string, err error) {
 		for i := len(query.Repository.Releases.Edges) - 1; i >= 0; i-- {
 			node := query.Repository.Releases.Edges[i]
 
-			// versionfilter.Search returns the last matching item from the version lits
-			// Since we only provide ony element in the list, we can safely assume that no element
+			// versionfilter.Search returns the last matching item from the version list
+			// Since we only provide one element in the list, we can safely assume that no element
 			// will be returned if the version doesn't match the pattern
 			foundVersion, err := g.versionFilter.Search([]string{node.Node.TagName})
 			if err != nil {
