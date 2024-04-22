@@ -30,4 +30,7 @@ changelogs:
       #repository: nocode
       owner: updatecli
       repository: udash
+      versionfilter:
+        kind: semver
+        pattern: ~0.1
     

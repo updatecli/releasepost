@@ -10,6 +10,7 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 	"github.com/shurcooL/githubv4"
+	"github.com/updatecli/updatecli/pkg/plugins/utils/version"
 	"golang.org/x/oauth2"
 )
 
@@ -18,9 +19,10 @@ GitHub contains settings to interact with GitHub
 */
 type Github struct {
 	// Spec contains inputs coming from updatecli configuration
-	Spec        Spec
-	client      gitHubClient
-	releaseType ReleaseType
+	Spec          Spec
+	client        gitHubClient
+	releaseType   ReleaseType
+	versionFilter version.Filter
 }
 
 /*
@@ -63,6 +65,11 @@ func New(s interface{}) (*Github, error) {
 		newSpec.URL = "https://" + newSpec.URL
 	}
 
+	newFilters, err := newSpec.VersionFilter.Init()
+	if err != nil {
+		return &Github{}, fmt.Errorf("initializing version filter: %w", err)
+	}
+
 	// Initialize github client
 	src := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: newSpec.Token},
@@ -70,7 +77,8 @@ func New(s interface{}) (*Github, error) {
 	httpClient := oauth2.NewClient(context.Background(), src)
 
 	g := Github{
-		Spec: newSpec,
+		Spec:          newSpec,
+		versionFilter: newFilters,
 	}
 
 	if newSpec.TypeFilter != nil {
