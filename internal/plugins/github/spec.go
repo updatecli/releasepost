@@ -3,42 +3,33 @@ package github
 import (
 	"fmt"
 	"strings"
+
+	"github.com/updatecli/updatecli/pkg/plugins/utils/version"
 )
 
 /*
 Spec represents the configuration input
 */
 type Spec struct {
-	/*
-		owner specifies the name of a GitHub user or organization.
-	*/
+	// owner specifies the name of a GitHub user or organization.
 	Owner string `yaml:",omitempty" jsonschema:"required"`
-	/*
-		repository specifies the name of a repository for a specific owner.
-	*/
+	// repository specifies the name of a repository for a specific owner.
 	Repository string `yaml:",omitempty" jsonschema:"required"`
-	/*
-		TypeFilter specifies the GitHub Release type to retrieve.
-	*/
+	// TypeFilter specifies the GitHub Release type to retrieve.
 	TypeFilter *ReleaseType `yaml:",omitempty"`
-	/*
-		"token" specifies the credential used to authenticate with GitHub API.
-	*/
+	// "token" specifies the credential used to authenticate with GitHub API.
 	Token string `yaml:",omitempty" jsonschema:"required"`
-	/*
-		url specifies the default github url in case of GitHub enterprise
-
-		default:
-			github.com
-	*/
+	// url specifies the default github url in case of GitHub enterprise
+	//
+	// default:
+	// 	github.com
 	URL string `yaml:",omitempty"`
-	/*
-		"username" specifies the username used to authenticate with GitHub API.
-
-		remark:
-			the token is usually enough to authenticate with GitHub API.
-	*/
+	// "username" specifies the username used to authenticate with GitHub API.
+	// remark:
+	//   the token is usually enough to authenticate with GitHub API.
 	Username string `yaml:",omitempty"`
+	// VersionFilter provides parameters to specify version pattern and its type like regex, semver, or just latest.
+	VersionFilter version.Filter `yaml:",omitempty"`
 }
 
 /*
