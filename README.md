@@ -109,7 +109,7 @@ Here is a non-exhaustive list of possible contributions:
 
 **Can releasepost generate changelog?**
 
-No, they are already great tools for doing that.
+No, there are already great tools for doing that.
 
 * [Release Drafter](https://github.com/release-drafter/release-drafter) can automatically generate the next changelogs based on pullrequest labels. If the generated changelog is wrong, you can still update labels on already merged pullrequest and then retrigger release drafter to update the the generated changelog.
 
