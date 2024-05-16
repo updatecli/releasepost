@@ -11,15 +11,11 @@ The configuration file uses the YAML format and accepts the following parameters
 
 ### Changelogs
 
-**name** defines the changelog name to monitor. It is used to identify a changelog configuration among differentts ones.
-
-**dir** defines the directory where to mirror the release note
-
-**kind** defines the kind of changelog to mirror, for example `github`
-
-**formats** defines a list of format parameters for the mirrored changelog.
-
-**spec** defines specific parameters to a kind of mirror.
+- `name` defines the changelog name to monitor. It is used to identify a changelog configuration among differentts ones.
+- `dir` defines the directory where to mirror the release note
+- `kind` defines the kind of changelog to mirror, for example `github`
+- `formats` defines a list of format parameters for the mirrored changelog.
+- `spec` defines specific parameters to a kind of mirror.
 
 
 The following example can be used for a HUGO website
@@ -89,9 +85,23 @@ The following environment variables will be used as a fallback
 
 ### Updatecli
 
-Releasepost is designed to work with [Updatecli](https://github.com/updatecli/updatecli) where releasepost is responsible to generate the correct files based on third changelogs and Updatecli to automate the process of publishing them to a git repository
+Releasepost is designed to work with [Updatecli](https://github.com/updatecli/updatecli) where releasepost is responsible to generate the correct files based on third changelogs and Updatecli to automate the process of publishing them to a git repository.
 
-TODO: Show an updatecli demo
+It can be used with one of the two Updatecli policy:
+
+#### HUGO
+
+Used by the Updatecli project to publish all release notes on [updatecli.io](https://www.updatecli.io/changelogs/updatecli/)
+
+* [ghcr.io/updatecli/policies/releasepost/releasepost](https://github.com/updatecli/policies/tree/main/updatecli/policies/releasepost/releasepost)
+* [releasepost.yaml](https://github.com/updatecli/website/blob/master/.releasepost.yaml)
+
+#### Docusaurus - rancher.fleet.io
+
+Used by the Rancher Fleet project to publish all releast note associated to a MAJOR.MINOR version - [rancher.fleet.io](https://fleet.rancher.io/0.9/changelogs/changelogs/v0.9.3)
+
+* [ghcr.io/olblak/rancherlabs-policies/docusaurus/releasepost](https://github.com/olblak/rancherlabs-policies/tree/main/updatecli/policies/docusaurus/releasepost)
+* [releasepost.yaml](https://github.com/rancher/fleet-docs/blob/main/releasepost.yaml)
 
 ## Contributing
 
@@ -109,7 +119,7 @@ Here is a non-exhaustive list of possible contributions:
 
 **Can releasepost generate changelog?**
 
-No, they are already great tools for doing that.
+No, there are already great tools for doing that.
 
 * [Release Drafter](https://github.com/release-drafter/release-drafter) can automatically generate the next changelogs based on pullrequest labels. If the generated changelog is wrong, you can still update labels on already merged pullrequest and then retrigger release drafter to update the the generated changelog.
 
