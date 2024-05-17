@@ -28,38 +28,25 @@ var (
 	nameAsciidoc = "asciidoc"
 )
 
-/*
-Config contains various information used to configure the way changelogs are retrieved
-*/
+// Config contains various information used to configure the way changelogs are retrieved
 type Config struct {
-	/*
-		Name specifies the name of the changelog to retrieve. It is only used for identification purposes.
-	*/
+	// Name specifies the name of the changelog to retrieve. It is only used for identification purposes.
 	Name string
-	/*
-		dir specifies the directory where changelog files will be repost.
-	*/
+	// dir specifies the directory where changelog files will be repost.
 	Dir string
-	/*
-		kind specifies the kind of changelog to retrieve.
-
-		accepted values:
-			* github
-	*/
+	// kind specifies the kind of changelog to retrieve.
+	//
+	// accepted values:
+	//   * github
+	//
 	Kind string
-	/*
-		format specifies the format of the changelog to generate.
-	*/
+	// format specifies the format of the changelog to generate.
 	Formats []ConfigFormat
-	/*
-		spec specifies the configuration input for a specific kind of changelog.
-	*/
+	// spec specifies the configuration input for a specific kind of changelog.
 	Spec interface{}
 }
 
-/*
-Sanitize ensures that the configuration is valid and that all required fields are set.
-*/
+// Sanitize ensures that the configuration is valid and that all required fields are set.
 func (c *Config) Sanitize(configFile string) error {
 
 	if c.Name != "" {
@@ -101,9 +88,7 @@ func (c *Config) Sanitize(configFile string) error {
 	return nil
 }
 
-/*
-SaveToDisk saves one changelog per file per format to disk
-*/
+// SaveToDisk saves one changelog per file per format to disk
 func (c Config) SaveToDisk(changelogs []Spec) error {
 
 	fmt.Println("Generating changelogs")
@@ -134,7 +119,7 @@ func (c Config) SaveToDisk(changelogs []Spec) error {
 					defaultChangelogDir,
 					changelogs[i].Tag+".adoc",
 				)
-				if err = toAsciidocFile(data, filename); err != nil {
+				if err = toAsciidocFile(data, filename, format.FileTemplate); err != nil {
 					fmt.Printf("creating asciidoc file %s: %v", filename, err)
 					continue
 				}
@@ -156,7 +141,7 @@ func (c Config) SaveToDisk(changelogs []Spec) error {
 					defaultChangelogDir,
 					changelogs[i].Tag+".md",
 				)
-				if err = toMarkdownFile(data, filename); err != nil {
+				if err = toMarkdownFile(data, filename, format.FileTemplate); err != nil {
 					fmt.Printf("creating markdown file %s: %v", filename, err)
 					continue
 				}
@@ -205,8 +190,9 @@ func (c Config) SaveIndexToDisk(changelogs []Spec) error {
 
 		switch format.Extension {
 		case nameAsciidoc:
+
 			indexFileName := format.IndexFileName + ".adoc"
-			if err := toIndexAsciidocFile(data, filepath.Join(c.Dir, indexFileName)); err != nil {
+			if err := toIndexAsciidocFile(data, filepath.Join(c.Dir, indexFileName), format.IndexFileTemplate); err != nil {
 				fmt.Printf("creating index asciidoc file %s: %v\n", filepath.Join(c.Dir, indexFileName), err)
 			}
 
@@ -235,7 +221,7 @@ func (c Config) SaveIndexToDisk(changelogs []Spec) error {
 
 		case nameMarkdown:
 			indexFileName := format.IndexFileName + ".md"
-			if err := toIndexMarkdownFile(data, filepath.Join(c.Dir, indexFileName)); err != nil {
+			if err := toIndexMarkdownFile(data, filepath.Join(c.Dir, indexFileName), format.IndexFileTemplate); err != nil {
 				fmt.Printf("creating index markdown file %s: %v", filepath.Join(c.Dir, indexFileName), err)
 				continue
 			}
