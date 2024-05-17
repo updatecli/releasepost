@@ -1,6 +1,6 @@
 changelogs:
   - kind: github
-    dir: dist
+    dir: dist/0.1
     formats:
       - extension: asciidoc
         frontmatters: |
@@ -24,13 +24,53 @@ changelogs:
           title: "Index Changelog"
           ---
     spec:
-      # No release
-      # owner: updatecli-test
-      #owner: olblak
-      #repository: nocode
       owner: updatecli
       repository: udash
       versionfilter:
         kind: semver
         pattern: ~0.1
+  - kind: github
+    dir: dist/0.2
+    formats:
+      - extension: asciidoc
+        frontmatters: |
+          ---
+          title: "{{ .Changelog.Name }}"
+          date: {{ .Changelog.PublishedAt }}
+          ---
+        filetemplate: |
+          {{ .FrontMatters }}
+          // Disclaimer: this file is generated, do not edit it manually.
+
+          ---
+          {{ if .Changelog.DescriptionHTML }}
+          ++++
+
+          {{ .Changelog.DescriptionHTML }}
+
+          ++++
+          {{ else if .Changelog.Description}}
+          {{ .Changelog.Description }}
+          {{ end}}
+          ---
+        indexfrontmatters: |
+          ---
+          title: "Index Changelog"
+          ---
+        indexfiletemplate: |
+          {{ .FrontMatters }}
+          // Disclaimer: this file is generated, do not edit it manually.
+          [cols="1,1,1" options="header" frame="ends" grid="rows"]
+          |===
+          | Name | Author | Published Time
+          {{ range $pos, $release := .Changelogs }}
+          | link:{{ $release.Tag }}[{{ $release.Name}}{{ if (eq $pos 0) }}(latest){{ end}}] | {{ $release.Author }} | {{ $release.PublishedAt }}
+          {{ end }}
+          |===
+    spec:
+      owner: updatecli
+      repository: udash
+      versionfilter:
+        kind: semver
+        pattern: ~0.2
     

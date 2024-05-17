@@ -62,9 +62,13 @@ __Information retrieved from link:{{ .Changelog.URL }}[here]__
 `
 )
 
-func toAsciidocFile(data ReleaseData, filename string) error {
+func toAsciidocFile(data ReleaseData, filename string, fileTemplate string) error {
 
-	tmpl, err := template.New("asciidoc").Parse(asciidocTemplate)
+	if fileTemplate == "" {
+		fileTemplate = asciidocTemplate
+	}
+
+	tmpl, err := template.New("asciidoc").Parse(fileTemplate)
 	if err != nil {
 		return fmt.Errorf("parsing template: %v", err)
 	}
@@ -83,11 +87,15 @@ func toAsciidocFile(data ReleaseData, filename string) error {
 	return nil
 }
 
-func toIndexAsciidocFile(data IndexData, filename string) error {
+func toIndexAsciidocFile(data IndexData, filename string, fileTemplate string) error {
+
+	if fileTemplate == "" {
+		fileTemplate = indexAsciidocTemplate
+	}
 
 	tmpl, err := template.New("asciidoc").
 		Funcs(sprig.FuncMap()).
-		Parse(indexAsciidocTemplate)
+		Parse(fileTemplate)
 	if err != nil {
 		return fmt.Errorf("parsing template: %v", err)
 	}

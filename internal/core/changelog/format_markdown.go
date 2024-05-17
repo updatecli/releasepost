@@ -44,11 +44,15 @@ var (
 `
 )
 
-func toMarkdownFile(data ReleaseData, filename string) error {
+func toMarkdownFile(data ReleaseData, filename string, fileTemplate string) error {
+
+	if fileTemplate == "" {
+		fileTemplate = markdownTemplate
+	}
 
 	tmpl, err := template.New("markdown").
 		Funcs(sprig.FuncMap()).
-		Parse(markdownTemplate)
+		Parse(fileTemplate)
 	if err != nil {
 		return fmt.Errorf("parsing template: %v", err)
 	}
@@ -67,9 +71,13 @@ func toMarkdownFile(data ReleaseData, filename string) error {
 	return nil
 }
 
-func toIndexMarkdownFile(data IndexData, filename string) error {
+func toIndexMarkdownFile(data IndexData, filename string, fileTemplate string) error {
 
-	tmpl, err := template.New("markdown").Parse(indexMarkownTemplate)
+	if fileTemplate == "" {
+		fileTemplate = indexMarkownTemplate
+	}
+
+	tmpl, err := template.New("markdown").Parse(fileTemplate)
 	if err != nil {
 		return fmt.Errorf("parsing template: %v", err)
 	}

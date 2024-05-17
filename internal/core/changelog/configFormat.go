@@ -11,30 +11,45 @@ var (
 )
 
 type ConfigFormat struct {
-	/*
-		Extension is the file extension used for the changelog file.
-		accepted values:
-			* markdown
-			* json
-
-		default:
-			* markdown
-	*/
+	//
+	// Extension is the file extension used for the changelog file.
+	//
+	// accepted values:
+	//    * markdown
+	//    * json
+	//    * asciidoc
+	//
+	//  default: markdown
+	//
 	Extension string
-	/*
-		indexFileName is the name of the index file name without the extension.
-
-		default:
-			* _index
-	*/
+	// FileTemplate is the template used to generate the changelog file
+	//
+	// default: depends on the extension
+	//
+	// remark: This setting is useless for json files
+	//
+	FileTemplate string
+	// indexFileName is the name of the index file name without the extension.
+	//
+	// default: '_index'
+	//
 	IndexFileName string
-	/*
-		indexFrontMatters is the front matters using yaml syntax to add to the index file.
-	*/
+	// IndexFileTemplate is the template used to generate the index file
+	//
+	// default: depends on the extension
+	//
+	// remark: This setting is useless for json files
+	//
+	IndexFileTemplate string
+	// indexFrontMatters is the front matters using yaml syntax to add to the index file.
+	//
+	// default: empty
+	//
 	IndexFrontMatters string
-	/*
-		frontmatters is the front matters using yaml syntax to add to the changelog file.
-	*/
+	// frontmatters is the front matters using yaml syntax to add to the changelog file.
+	//
+	// default: empty
+	//
 	FrontMatters string
 }
 
