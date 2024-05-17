@@ -15,6 +15,7 @@ var (
 	configFile string
 	e          engine.Engine
 	dryRun     bool
+	cleanRun   bool
 
 	rootCmd = &cobra.Command{
 		Run: func(cmd *cobra.Command, args []string) {
@@ -36,7 +37,10 @@ var (
 				dryrun.Enabled = true
 				fmt.Println("Dry run mode enabled, no changelog will be saved to disk")
 			}
-			err = e.Run()
+			err = e.Run(cleanRun)
+			if cleanRun {
+				fmt.Println("Clean run mode enabled, releasepost will remove any files not created by releasepost in changelogs directories !")
+			}
 			if err != nil {
 				fmt.Printf("Failed to run releasepost: %v", err)
 				os.Exit(2)
@@ -59,6 +63,7 @@ It can creates files using different formats like markdown, asciidoctor, or json
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&configFile, "config", "c", "", "releasepost configuration file")
 	rootCmd.PersistentFlags().BoolVarP(&dryRun, "dry-run", "d", false, "Dry run mode")
+	rootCmd.PersistentFlags().BoolVar(&cleanRun, "clean", false, "Clean run, removes files from changelog directories not created by releasepost.")
 	rootCmd.AddCommand(
 		versionCmd,
 	)

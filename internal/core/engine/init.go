@@ -28,5 +28,9 @@ func (e *Engine) Init() error {
 		e.runners = append(e.runners, runner)
 	}
 
+	if len(e.config.Changelogs) == 0 {
+		return fmt.Errorf("no changelog found in configuration file")
+	}
+
 	return nil
 }
