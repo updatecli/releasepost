@@ -22,9 +22,9 @@ type Changelog struct {
 
 func (c Changelog) ExitCode() int {
 	if len(c.Created) == 0 && len(c.Modified) == 0 {
-		return 1
+		return 0
 	}
-	return 0
+	return 1
 }
 
 // UpdateResult update the result with the current changelog information
