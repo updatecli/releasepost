@@ -7,7 +7,7 @@ require (
 	github.com/Masterminds/sprig/v3 v3.2.3
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/shurcooL/githubv4 v0.0.0-20231126234147-1cffa1f02456
-	github.com/spf13/cobra v1.8.0
+	github.com/spf13/cobra v1.8.1
 	github.com/updatecli/updatecli v0.75.0
 	golang.org/x/oauth2 v0.18.0
 	gopkg.in/yaml.v3 v3.0.1
