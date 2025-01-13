@@ -37,7 +37,7 @@ var (
 {{ end}}
 `
 
-	indexMarkownTemplate = `{{ .FrontMatters }}
+	indexMarkdownTemplate = `{{ .FrontMatters }}
 {{ range $pos, $release := .Changelogs }}
 * [{{ $release.Name}}](changelogs/{{ $release.Tag }}) {{ if (eq $pos 0) }}(latest){{ end}}
 {{ end }}
@@ -74,7 +74,7 @@ func toMarkdownFile(data ReleaseData, filename string, fileTemplate string) erro
 func toIndexMarkdownFile(data IndexData, filename string, fileTemplate string) error {
 
 	if fileTemplate == "" {
-		fileTemplate = indexMarkownTemplate
+		fileTemplate = indexMarkdownTemplate
 	}
 
 	tmpl, err := template.New("markdown").Parse(fileTemplate)
