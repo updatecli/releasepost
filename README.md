@@ -1,8 +1,10 @@
 # releasepost
 
-*Repost changelogs to your static site generator git repository*
+*Repost changelogs to your static website*
 
-It can generate json, markdown, and asciidoctor files.
+Releasepost can generate json, markdown, and asciidoctor files.
+
+Releasepost creates one file per release note, plus one additional index file.
 
 ## Config
 
@@ -95,6 +97,7 @@ Used by the Updatecli project to publish all release notes on [updatecli.io](htt
 
 * [ghcr.io/updatecli/policies/releasepost/releasepost](https://github.com/updatecli/policies/tree/main/updatecli/policies/releasepost/releasepost)
 * [releasepost.yaml](https://github.com/updatecli/website/blob/master/.releasepost.yaml)
+* [GitHub action](https://github.com/updatecli/website/blob/master/.github/workflows/updatecli.weekly.yaml)
 
 #### Docusaurus - rancher.fleet.io
 
@@ -102,8 +105,12 @@ Used by the Rancher Fleet project to publish all releast note associated to a MA
 
 * [ghcr.io/olblak/rancherlabs-policies/docusaurus/releasepost](https://github.com/olblak/rancherlabs-policies/tree/main/updatecli/policies/docusaurus/releasepost)
 * [releasepost.yaml](https://github.com/rancher/fleet-docs/blob/main/releasepost.yaml)
+* [GitHub action](https://github.com/rancher/fleet-docs/blob/main/.github/workflows/updatecli.yml)
 
 ## Contributing
+
+This project already solves our initial problem which was to republish Updatecli changelogs from GitHub release to a static website.
+That being said, it was also built with extensibility in mind so we could monitor other sources than GitHub releases.
 
 As a community-oriented project, all contributions are greatly appreciated!
 
@@ -125,7 +132,7 @@ No, there are already great tools for doing that.
 
 * [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog) can automatically generate the next changelogs based on commit following conventional commit. If the generated changelog is wrong, you can still modify your git history...
 
-* [ Changie](https://github.com/miniscruff/changie) is another great tool to generate changelog
+* [Changie](https://github.com/miniscruff/changie) is another great tool to generate changelog
 
 The purpose of releasepost is to retrieve already published changelogs and to republish them, for example on a project website.
 

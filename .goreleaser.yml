@@ -1,4 +1,5 @@
 ---
+version: 2
 archives:
   - name_template: >-
       {{ .ProjectName }}_
@@ -15,53 +16,12 @@ archives:
       - completions/*
       - manpages/*
 
-#aurs:
-#  - homepage:  https://www.updatecli.io
-#    description: Repost changelogs to your static site generator git repository
-#    maintainers:
-#      - 'Olivier Vernin <olivier at vernin dot me>'
-#      - 'Jonathan Neidel <aur at jneidel dot com>'
-#    license: 'Apache'
-#    private_key: '{{ .Env.AUR_KEY }}'
-#    git_url: 'ssh://aur@aur.archlinux.org/releasepost-bin.git'
-#    package: |-
-#      # bin
-#      install -Dm755 "./releasepost" "${pkgdir}/usr/bin/releasepost"
-#      # license
-#      install -Dm644 "./LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
-#      # completions
-#      install -Dm644 "./completions/releasepost.bash" "${pkgdir}/usr/share/bash-completion/completions/releasepost"
-#      install -Dm644 "./completions/releasepost.zsh" "${pkgdir}/usr/share/zsh/site-functions/_releasepost"
-#      install -Dm644 "./completions/releasepost.fish" "${pkgdir}/usr/share/fish/vendor_completions.d/releasepost.fish"
-#      # man pages
-#      install -Dm644 "./manpages/releasepost.1.gz" "${pkgdir}/usr/share/man/man1/releasepost.1.gz"
-
 before:
   hooks:
     - go mod tidy
     - go mod download
     - ./scripts/completions.sh
     - ./scripts/manpages.sh
-
-#brews:
-#  - name: releasepost
-#    folder: Formula
-#    repository:
-#      owner: updatecli
-#      name: homebrew-releasepost
-#      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-#    commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
-#    homepage: "https://updatecli.io/"
-#    description: 'Updatecli is a declarative dependency management command line tool.'
-#    license: 'Apache-2.0'
-#    test: |
-#      system "#{bin}/releasepost version"
-#    install: |-
-#      bin.install "releasepost"
-#      bash_completion.install "completions/releasepost.bash" => "releasepost"
-#      zsh_completion.install "completions/releasepost.zsh" => "_releasepost"
-#      fish_completion.install "completions/releasepost.fish"
-#      man1.install "manpages/releasepost.1.gz"
 
 builds:
   - id: releasepost
@@ -83,7 +43,7 @@ builds:
 
 changelog:
   ## Delegate Changelog to release-drafter
-  skip: true
+  disable: true
 
 checksum:
   name_template: 'checksums.txt'
