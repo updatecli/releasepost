@@ -12,10 +12,20 @@ import (
 )
 
 var (
-	configFile string
-	e          engine.Engine
-	dryRun     bool
-	cleanRun   bool
+	configFile       string
+	e                engine.Engine
+	dryRun           bool
+	cleanRun         bool
+	detailedExitCode bool
+
+	detailedExitCodeCmdDescription string = `Returns a detailed exit code when the command exits.
+When provided, this argument changes the exit codes and their meanings
+to provide more granular information about what the resulting plan contains:
+
+0 = Succeeded with empty diff (no changes)
+1 = Error
+2 = Succeeded with non-empty diff (changes present)
+`
 
 	rootCmd = &cobra.Command{
 		Run: func(cmd *cobra.Command, args []string) {
@@ -43,10 +53,10 @@ var (
 			}
 			if err != nil {
 				fmt.Printf("Failed to run releasepost: %v", err)
-				os.Exit(2)
+				os.Exit(1)
 			}
 
-			os.Exit(result.ChangelogResult.ExitCode())
+			os.Exit(result.ChangelogResult.ExitCode(detailedExitCode))
 		},
 		Use:   "releasepost",
 		Short: "releasepost is a release note town crier",
@@ -64,7 +74,9 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&configFile, "config", "c", "", "releasepost configuration file")
 	rootCmd.PersistentFlags().BoolVarP(&dryRun, "dry-run", "d", false, "Dry run mode")
 	rootCmd.PersistentFlags().BoolVar(&cleanRun, "clean", false, "Clean run, removes files from changelog directories not created by releasepost.")
+	rootCmd.PersistentFlags().BoolVar(&detailedExitCode, "detailed-exit-code", false, detailedExitCodeCmdDescription)
 	rootCmd.AddCommand(
+
 		versionCmd,
 	)
 }

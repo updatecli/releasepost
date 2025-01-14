@@ -20,11 +20,16 @@ type Changelog struct {
 	UnTracked  []string `json:"untracked"`
 }
 
-func (c Changelog) ExitCode() int {
+func (c Changelog) ExitCode(detailedExitCode bool) int {
+
+	if !detailedExitCode {
+		return 0
+	}
+
 	if len(c.Created) == 0 && len(c.Modified) == 0 {
 		return 0
 	}
-	return 1
+	return 2
 }
 
 // UpdateResult update the result with the current changelog information
