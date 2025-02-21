@@ -31,7 +31,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6.3.1
+        uses: golangci/golangci-lint-action@v6.5.0
         with:
           # Required: the version of golangci-lint is required
           # and must be specified without patch version:
@@ -39,7 +39,7 @@ jobs:
           version: v1.63.4
           install-mode: "binary"
       - name: Install GoReleaser
-        uses: goreleaser/goreleaser-action@v6.1.0
+        uses: goreleaser/goreleaser-action@v6.2.1
         with:
           install-only: true
       - name: Show GoReleaser version
