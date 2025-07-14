@@ -2,6 +2,7 @@ package github
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/url"
 	"strings"
@@ -51,7 +52,7 @@ func New(s interface{}) (*Github, error) {
 		for _, err := range errs {
 			strErrs = append(strErrs, err.Error())
 		}
-		return &Github{}, fmt.Errorf(strings.Join(strErrs, "\n"))
+		return &Github{}, errors.New(strings.Join(strErrs, "\n"))
 	}
 
 	newSpec.mergeFromEnv("RELEASEPOST_GITHUB")
