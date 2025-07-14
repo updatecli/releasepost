@@ -8,8 +8,8 @@ spec:
     pattern: minoronly
   ignore:
     - modules:
-      # Ignoring the following modules as they do not publish release
-      github.com/shurcooL/githubv4: ""
+        # Ignoring the following modules as they do not publish release
+        github.com/shurcooL/githubv4: ""
 
   only:
     # This repository contains other go.sum file used for testing.
