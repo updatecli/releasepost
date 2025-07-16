@@ -9,7 +9,9 @@ on:
   schedule:
     # Run every hour
     - cron: "0 * * * *"
-permissions: {}
+permissions:
+  contents: "write"
+  pull-requests: "write"
 jobs:
   updatecli:
     runs-on: ubuntu-latest
