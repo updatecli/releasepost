@@ -9,7 +9,9 @@ on:
   schedule:
     # Run every hour
     - cron: "0 * * * *"
-permissions: {}
+permissions:
+  contents: "write"
+  pull-requests: "write"
 jobs:
   updatecli:
     runs-on: ubuntu-latest
@@ -21,7 +23,7 @@ jobs:
       - name: "Setup updatecli"
         uses: "updatecli/updatecli-action@v2"
       - name: Set up Go
-        uses: actions/setup-go@v5.3.0
+        uses: actions/setup-go@v5.5.0
         with:
           go-version-file: "go.mod"
         id: go
