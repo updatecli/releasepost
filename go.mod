@@ -8,7 +8,7 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/shurcooL/githubv4 v0.0.0-20231126234147-1cffa1f02456
 	github.com/spf13/cobra v1.9.1
-	github.com/updatecli/updatecli v0.104.0
+	github.com/updatecli/updatecli v0.105.0
 	golang.org/x/oauth2 v0.30.0
 	gopkg.in/yaml.v3 v3.0.1
 )
