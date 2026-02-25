@@ -40,18 +40,21 @@ builds:
       - amd64
       - arm64
       - arm
+    ignore:
+      - goos: windows
+        goarch: arm
 
 changelog:
   ## Delegate Changelog to release-drafter
   disable: true
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 
 dockers:
   - image_templates:
-      - 'updatecli/releasepost:{{ .Tag }}-amd64'
-      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-amd64'
+      - "updatecli/releasepost:{{ .Tag }}-amd64"
+      - "ghcr.io/updatecli/releasepost:{{ .Tag }}-amd64"
     dockerfile: Dockerfile
     use: buildx
     build_flag_templates:
@@ -68,8 +71,8 @@ dockers:
     extra_files:
       - Makefile
   - image_templates:
-      - 'updatecli/releasepost:{{ .Tag }}-arm64'
-      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-arm64'
+      - "updatecli/releasepost:{{ .Tag }}-arm64"
+      - "ghcr.io/updatecli/releasepost:{{ .Tag }}-arm64"
     dockerfile: Dockerfile
     use: buildx
     build_flag_templates:
@@ -91,38 +94,38 @@ docker_signs:
     artifacts: manifests
     output: true
     args:
-      - 'sign'
-      - '--yes'
-      - '${artifact}@${digest}'
+      - "sign"
+      - "--yes"
+      - "${artifact}@${digest}"
 
 docker_manifests:
-  - name_template: 'updatecli/releasepost:{{ .Tag }}'
+  - name_template: "updatecli/releasepost:{{ .Tag }}"
     image_templates:
-      - 'updatecli/releasepost:{{ .Tag }}-amd64'
-      - 'updatecli/releasepost:{{ .Tag }}-arm64'
-  - name_template: 'ghcr.io/updatecli/releasepost:{{ .Tag }}'
+      - "updatecli/releasepost:{{ .Tag }}-amd64"
+      - "updatecli/releasepost:{{ .Tag }}-arm64"
+  - name_template: "ghcr.io/updatecli/releasepost:{{ .Tag }}"
     image_templates:
-      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-amd64'
-      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-arm64'
-  - name_template: 'updatecli/releasepost:latest'
+      - "ghcr.io/updatecli/releasepost:{{ .Tag }}-amd64"
+      - "ghcr.io/updatecli/releasepost:{{ .Tag }}-arm64"
+  - name_template: "updatecli/releasepost:latest"
     image_templates:
-      - 'updatecli/releasepost:{{ .Tag }}-amd64'
-      - 'updatecli/releasepost:{{ .Tag }}-arm64'
-  - name_template: 'ghcr.io/updatecli/releasepost:latest'
+      - "updatecli/releasepost:{{ .Tag }}-amd64"
+      - "updatecli/releasepost:{{ .Tag }}-arm64"
+  - name_template: "ghcr.io/updatecli/releasepost:latest"
     image_templates:
-      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-amd64'
-      - 'ghcr.io/updatecli/releasepost:{{ .Tag }}-arm64'
+      - "ghcr.io/updatecli/releasepost:{{ .Tag }}-amd64"
+      - "ghcr.io/updatecli/releasepost:{{ .Tag }}-arm64"
 
 env:
   - GO111MODULE=on
   - CGO_ENABLED=0
 
 nfpms:
-  - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-    homepage: 'https://www.updatecli.io'
-    description: 'Repost changelogs to your static site generator git repository'
-    maintainer: 'Olivier Vernin <olivier@vernin.me>'
-    license: 'Apache-2.0'
+  - file_name_template: "{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    homepage: "https://www.updatecli.io"
+    description: "Repost changelogs to your static site generator git repository"
+    maintainer: "Olivier Vernin <olivier@vernin.me>"
+    license: "Apache-2.0"
     vendor: Updatecli
     section: utils
     formats:
@@ -141,7 +144,7 @@ nfpms:
         file_info:
           mode: 0644
       - src: ./completions/releasepost.zsh
-        dst:  /usr/share/zsh/vendor-completions/_releastpost
+        dst: /usr/share/zsh/vendor-completions/_releastpost
         file_info:
           mode: 0644
       - src: ./manpages/releasepost.1.gz
@@ -161,13 +164,13 @@ sboms:
 
 signs:
   - cmd: cosign
-    certificate: '${artifact}.pem'
+    certificate: "${artifact}.pem"
     signature: "${artifact}.sig"
     output: true
     artifacts: checksum
     args:
       - sign-blob
-      - '--yes'
-      - '--output-certificate=${certificate}'
-      - '--output-signature=${signature}'
-      - '${artifact}'
+      - "--yes"
+      - "--output-certificate=${certificate}"
+      - "--output-signature=${signature}"
+      - "${artifact}"
