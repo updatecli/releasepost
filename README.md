@@ -101,7 +101,7 @@ Used by the Updatecli project to publish all release notes on [updatecli.io](htt
 
 #### Docusaurus - rancher.fleet.io
 
-Used by the Rancher Fleet project to publish all releast note associated to a MAJOR.MINOR version - [rancher.fleet.io](https://fleet.rancher.io/0.9/changelogs/changelogs/v0.9.3)
+Used by the Rancher Fleet project to publish all release note associated to a MAJOR.MINOR version - [rancher.fleet.io](https://fleet.rancher.io/0.9/changelogs/changelogs/v0.9.3)
 
 * [ghcr.io/olblak/rancherlabs-policies/docusaurus/releasepost](https://github.com/olblak/rancherlabs-policies/tree/main/updatecli/policies/docusaurus/releasepost)
 * [releasepost.yaml](https://github.com/rancher/fleet-docs/blob/main/releasepost.yaml)
