@@ -37,7 +37,7 @@ policies:
     policy: ghcr.io/updatecli/policies/golang/version:0.7.1@sha256:b8590dff076dbd81ac160351e4749142f94a9ea718cc18c3c56c126067a29607
 
   - name: Major Golang Module update
-    policy: ghcr.io/updatecli/policies/autodiscovery/golang:0.11.1@sha256:0a66e83d6d5c7a122bb2c7e28eb27a34e16aa16450979a8bc323d52a7a453739
+    policy: ghcr.io/updatecli/policies/autodiscovery/golang:0.13.1@sha256:85a008b9760fc02b05f68f4047d53b7c05f7250d5a8e8e7da33e925c72c885e0
     valuesinline:
       name: "deps(golang): Bump Major version for Golang module"
       pipelineid: "golang/gomod/major"
