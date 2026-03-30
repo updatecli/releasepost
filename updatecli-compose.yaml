@@ -26,7 +26,7 @@ policies:
           monitor: active
 
   - name: Update Updatecli version in GitHub action
-    policy: ghcr.io/updatecli/policies/updatecli/githubaction:0.7.0
+    policy: ghcr.io/updatecli/policies/updatecli/githubaction:0.8.1@sha256:48872bbf1a09cfff32ff5ffa07086c20b40d6888c19c36048b18f84bbdad37fe
     valuesinline:
       pipeline:
         labels:
