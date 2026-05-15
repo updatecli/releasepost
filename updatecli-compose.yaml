@@ -34,7 +34,7 @@ policies:
           monitor: active
 
   - name: Golang Version
-    policy: ghcr.io/updatecli/policies/golang/version:0.7.1@sha256:b8590dff076dbd81ac160351e4749142f94a9ea718cc18c3c56c126067a29607
+    policy: ghcr.io/updatecli/policies/golang/version:0.8.0@sha256:5bd7aa9da3251bdb73e3001715acf76f40add7d4aa5a0fa0621b31bd8a3ccc0a
 
   - name: Major Golang Module update
     policy: ghcr.io/updatecli/policies/autodiscovery/golang:0.13.1@sha256:85a008b9760fc02b05f68f4047d53b7c05f7250d5a8e8e7da33e925c72c885e0
