@@ -3,7 +3,7 @@ module github.com/updatecli/releasepost
 go 1.25.1
 
 require (
-	github.com/Masterminds/semver/v3 v3.4.0
+	github.com/Masterminds/semver/v3 v3.5.0
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/shurcooL/githubv4 v0.0.0-20231126234147-1cffa1f02456
