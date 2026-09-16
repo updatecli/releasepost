@@ -1,6 +1,6 @@
 module github.com/updatecli/releasepost
 
-go 1.25.1
+go 1.25.3
 
 require (
 	github.com/Masterminds/semver/v3 v3.4.0
@@ -8,8 +8,8 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/shurcooL/githubv4 v0.0.0-20231126234147-1cffa1f02456
 	github.com/spf13/cobra v1.10.1
-	github.com/updatecli/updatecli v0.107.0
-	golang.org/x/oauth2 v0.30.0
+	github.com/updatecli/updatecli v0.999.0
+	golang.org/x/oauth2 v0.32.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -27,7 +27,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/cast v1.7.0 // indirect
 	github.com/spf13/pflag v1.0.9 // indirect
-	golang.org/x/crypto v0.41.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/crypto v0.43.0 // indirect
+	golang.org/x/sys v0.37.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )
