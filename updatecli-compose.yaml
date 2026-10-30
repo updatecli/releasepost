@@ -12,7 +12,7 @@ valuesinline:
 
 policies:
   - name: Update golangci-lint
-    policy: ghcr.io/updatecli/policies/golangci-lint/githubaction:0.8.1@sha256:7fb34ae17a84641f02c3ff2aa0f8156a7108f32f21282b0070b8883c86ba6e67
+    policy: ghcr.io/updatecli/policies/golangci-lint/githubaction:0.9.0@sha256:caccf9fe8fd42ffb113bf949cdf00f0bace80df1e59eadbd3cfcfbbfe5271161
 
   - name: Updatecli GitHub action
     policy: ghcr.io/updatecli/policies/autodiscovery/githubaction:0.4.1@sha256:869b676074f9fee7edd5d488140a12c3b09a5f8a175f12f26ea85a4f8bd0a9d1
